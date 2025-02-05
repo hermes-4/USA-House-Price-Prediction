@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>House Price Predictor</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .card {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      .alert {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2 class="text-center">House Price Predictor</h2>
+        <form action="/predict-house-price" method="POST">
+          <div class="form-group">
+            <label for="bedrooms">Bedrooms</label>
+            <input
+              type="number"
+              class="form-control"
+              id="bedrooms"
+              name="bedrooms"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="bathrooms">Bathrooms</label>
+            <input
+              type="number"
+              class="form-control"
+              id="bathrooms"
+              name="bathrooms"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sqft_living">Square Feet Living</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sqft_living"
+              name="sqft_living"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sqft_lot">Square Feet Lot</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sqft_lot"
+              name="sqft_lot"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="floors">Floors</label>
+            <input
+              type="number"
+              class="form-control"
+              id="floors"
+              name="floors"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="waterfront">Waterfront</label>
+            <input
+              type="number"
+              class="form-control"
+              id="waterfront"
+              name="waterfront"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="view">View</label>
+            <input
+              type="number"
+              class="form-control"
+              id="view"
+              name="view"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="condition">Condition</label>
+            <input
+              type="number"
+              class="form-control"
+              id="condition"
+              name="condition"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sqft_above">Square Feet Above</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sqft_above"
+              name="sqft_above"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sqft_basement">Square Feet Basement</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sqft_basement"
+              name="sqft_basement"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="yr_built">Year Built</label>
+            <input
+              type="number"
+              class="form-control"
+              id="yr_built"
+              name="yr_built"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="yr_renovated">Year Renovated</label>
+            <input
+              type="number"
+              class="form-control"
+              id="yr_renovated"
+              name="yr_renovated"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input
+              type="text"
+              class="form-control"
+              id="street"
+              name="street"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              name="city"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statezip">State & Zip</label>
+            <input
+              type="text"
+              class="form-control"
+              id="statezip"
+              name="statezip"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              id="country"
+              name="country"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="date"
+              name="date"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Predict
+          </button>
+        </form>
+        {% if prediction %}
+        <div class="alert alert-info text-center mt-4">
+          <h4>Predicted House Price: ${{ prediction }}</h4>
+        </div>
+        {% endif %} {% if error %}
+        <div class="alert alert-danger text-center mt-4">
+          <h4>{{ error }}</h4>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
