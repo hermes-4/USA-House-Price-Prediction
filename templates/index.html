@@ -8,6 +8,10 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
     <style>
       body {
         background-color: #f8f9fa;
@@ -27,197 +31,316 @@
       .alert {
         margin-top: 20px;
       }
+      .form-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .btn-clear {
+        margin-left: 10px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="card">
         <h2 class="text-center">House Price Predictor</h2>
-        <form action="/predict-house-price" method="POST">
-          <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
-            <input
-              type="number"
-              class="form-control"
-              id="bedrooms"
-              name="bedrooms"
-              required
-            />
+        <form id="prediction-form" action="/predict-house-price" method="POST">
+          <div class="form-row">
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="bedrooms">Bedrooms</label>
+              <input
+                type="number"
+                class="form-control"
+                id="bedrooms"
+                name="bedrooms"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="bathrooms">Bathrooms</label>
+              <input
+                type="number"
+                class="form-control"
+                id="bathrooms"
+                name="bathrooms"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="sqft_living">Square Feet Living</label>
+              <input
+                type="number"
+                class="form-control"
+                id="sqft_living"
+                name="sqft_living"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="sqft_lot">Square Feet Lot</label>
+              <input
+                type="number"
+                class="form-control"
+                id="sqft_lot"
+                name="sqft_lot"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="floors">Floors</label>
+              <input
+                type="number"
+                class="form-control"
+                id="floors"
+                name="floors"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="waterfront">Waterfront</label>
+              <input
+                type="number"
+                class="form-control"
+                id="waterfront"
+                name="waterfront"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="view">View</label>
+              <input
+                type="number"
+                class="form-control"
+                id="view"
+                name="view"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="condition">Condition</label>
+              <input
+                type="number"
+                class="form-control"
+                id="condition"
+                name="condition"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="sqft_above">Square Feet Above</label>
+              <input
+                type="number"
+                class="form-control"
+                id="sqft_above"
+                name="sqft_above"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="sqft_basement">Square Feet Basement</label>
+              <input
+                type="number"
+                class="form-control"
+                id="sqft_basement"
+                name="sqft_basement"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="yr_built">Year Built</label>
+              <input
+                type="number"
+                class="form-control"
+                id="yr_built"
+                name="yr_built"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="yr_renovated">Year Renovated</label>
+              <input
+                type="number"
+                class="form-control"
+                id="yr_renovated"
+                name="yr_renovated"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="street">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                id="street"
+                name="street"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="city">City</label>
+              <select class="form-control" id="city" name="city" required>
+                <option value="Seattle">Seattle</option>
+                <option value="Carnation">Carnation</option>
+                <option value="Issaquah">Issaquah</option>
+                <option value="Maple Valley">Maple Valley</option>
+                <option value="Kent">Kent</option>
+                <option value="Redmond">Redmond</option>
+                <option value="Clyde Hill">Clyde Hill</option>
+                <option value="Shoreline">Shoreline</option>
+                <option value="Mercer Island">Mercer Island</option>
+                <option value="Auburn">Auburn</option>
+                <option value="Bellevue">Bellevue</option>
+                <option value="Duvall">Duvall</option>
+                <option value="Renton">Renton</option>
+                <option value="Sammamish">Sammamish</option>
+                <option value="Woodinville">Woodinville</option>
+                <option value="Kirkland">Kirkland</option>
+                <option value="Burien">Burien</option>
+                <option value="Federal Way">Federal Way</option>
+                <option value="Normandy Park">Normandy Park</option>
+                <option value="Vashon">Vashon</option>
+                <option value="Kenmore">Kenmore</option>
+                <option value="Yarrow Point">Yarrow Point</option>
+                <option value="SeaTac">SeaTac</option>
+                <option value="Newcastle">Newcastle</option>
+                <option value="Covington">Covington</option>
+                <option value="Lake Forest Park">Lake Forest Park</option>
+                <option value="Snoqualmie">Snoqualmie</option>
+                <option value="Des Moines">Des Moines</option>
+                <option value="Fall City">Fall City</option>
+                <option value="Ravensdale">Ravensdale</option>
+                <option value="Tukwila">Tukwila</option>
+                <option value="North Bend">North Bend</option>
+                <option value="Medina">Medina</option>
+                <option value="Bothell">Bothell</option>
+                <option value="Enumclaw">Enumclaw</option>
+                <option value="Snoqualmie Pass">Snoqualmie Pass</option>
+                <option value="Pacific">Pacific</option>
+                <option value="Black Diamond">Black Diamond</option>
+                <option value="Beaux Arts Village">Beaux Arts Village</option>
+                <option value="Algona">Algona</option>
+                <option value="Preston">Preston</option>
+                <option value="Milton">Milton</option>
+                <option value="Skykomish">Skykomish</option>
+              </select>
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="statezip">State & Zip</label>
+              <input
+                type="text"
+                class="form-control"
+                id="statezip"
+                name="statezip"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="country">Country</label>
+              <input
+                type="text"
+                class="form-control"
+                id="country"
+                name="country"
+                required
+              />
+            </div>
+            <div class="form-group col-lg-4 col-md-6 col-12">
+              <label for="date">Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="date"
+                name="date"
+                required
+              />
+            </div>
           </div>
-          <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
-            <input
-              type="number"
-              class="form-control"
-              id="bathrooms"
-              name="bathrooms"
-              required
-            />
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-primary flex-grow-1">
+              Predict
+            </button>
+            <button type="button" class="btn btn-secondary btn-clear">
+              Clear Form
+            </button>
           </div>
-          <div class="form-group">
-            <label for="sqft_living">Square Feet Living</label>
-            <input
-              type="number"
-              class="form-control"
-              id="sqft_living"
-              name="sqft_living"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="sqft_lot">Square Feet Lot</label>
-            <input
-              type="number"
-              class="form-control"
-              id="sqft_lot"
-              name="sqft_lot"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="floors">Floors</label>
-            <input
-              type="number"
-              class="form-control"
-              id="floors"
-              name="floors"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="waterfront">Waterfront</label>
-            <input
-              type="number"
-              class="form-control"
-              id="waterfront"
-              name="waterfront"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="view">View</label>
-            <input
-              type="number"
-              class="form-control"
-              id="view"
-              name="view"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="condition">Condition</label>
-            <input
-              type="number"
-              class="form-control"
-              id="condition"
-              name="condition"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="sqft_above">Square Feet Above</label>
-            <input
-              type="number"
-              class="form-control"
-              id="sqft_above"
-              name="sqft_above"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="sqft_basement">Square Feet Basement</label>
-            <input
-              type="number"
-              class="form-control"
-              id="sqft_basement"
-              name="sqft_basement"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="yr_built">Year Built</label>
-            <input
-              type="number"
-              class="form-control"
-              id="yr_built"
-              name="yr_built"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="yr_renovated">Year Renovated</label>
-            <input
-              type="number"
-              class="form-control"
-              id="yr_renovated"
-              name="yr_renovated"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="street">Street</label>
-            <input
-              type="text"
-              class="form-control"
-              id="street"
-              name="street"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="city">City</label>
-            <input
-              type="text"
-              class="form-control"
-              id="city"
-              name="city"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="statezip">State & Zip</label>
-            <input
-              type="text"
-              class="form-control"
-              id="statezip"
-              name="statezip"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="country">Country</label>
-            <input
-              type="text"
-              class="form-control"
-              id="country"
-              name="country"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input
-              type="date"
-              class="form-control"
-              id="date"
-              name="date"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">
-            Predict
-          </button>
         </form>
-        {% if prediction %}
-        <div class="alert alert-info text-center mt-4">
-          <h4>Predicted House Price: ${{ prediction }}</h4>
+        <div
+          id="result"
+          class="alert alert-info text-center mt-4"
+          style="display: none"
+        >
+          <h4>Predicted House Price: $<span id="prediction"></span></h4>
         </div>
-        {% endif %} {% if error %}
-        <div class="alert alert-danger text-center mt-4">
-          <h4>{{ error }}</h4>
+        <div
+          id="error"
+          class="alert alert-danger text-center mt-4"
+          style="display: none"
+        >
+          <h4><span id="error-message"></span></h4>
         </div>
-        {% endif %}
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#prediction-form").on("submit", function (event) {
+          event.preventDefault();
+          toastr.info("Processing your request...");
+          $.ajax({
+            url: "/predict-house-price",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+              toastr.clear();
+              $("#result").hide();
+              $("#error").hide();
+              if (response.error) {
+                toastr.error(response.error);
+                $("#error-message").text(response.error);
+                $("#error").show();
+                $("html, body").animate(
+                  {
+                    scrollTop: $("#error").offset().top,
+                  },
+                  1000
+                );
+              } else {
+                toastr.success("Prediction complete");
+                $("#prediction").text(response.prediction);
+                $("#result").show();
+                $("html, body").animate(
+                  {
+                    scrollTop: $("#result").offset().top,
+                  },
+                  1000
+                );
+              }
+            },
+            error: function () {
+              toastr.clear();
+              toastr.error("An error occurred while processing your request.");
+              $("#error-message").text(
+                "An error occurred while processing your request."
+              );
+              $("#error").show();
+              $("html, body").animate(
+                {
+                  scrollTop: $("#error").offset().top,
+                },
+                1000
+              );
+            },
+          });
+        });
+
+        $(".btn-clear").on("click", function () {
+          $("#prediction-form")[0].reset();
+          $("#result").hide();
+          $("#error").hide();
+        });
+      });
+    </script>
   </body>
 </html>
