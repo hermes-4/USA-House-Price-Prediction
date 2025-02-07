@@ -9,6 +9,5 @@ plotly
 matplotlib
 numpy
 scikit-learn
-warnings
 scipy
 pickle
